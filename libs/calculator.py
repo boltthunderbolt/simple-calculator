@@ -1,4 +1,4 @@
-def showArithmeticOperator() :
+def show_arithmetic_operator() :
   global arithmeticOperator
   arithmeticOperator = [
   ['Addition', '+'],
@@ -9,8 +9,6 @@ def showArithmeticOperator() :
   ['Exponentiation','**'],
   ['Floor division','//']
   ];
-  print("Simple calculator with Python");
-  print("=============================\n")
   for index, operator in enumerate(arithmeticOperator, start=1) :
     print(f"{index}. {operator[0]}");
 
@@ -29,3 +27,7 @@ def calculation(firstNumber, chooseTheArithmeticOperator, secondNumber) :
     return firstNumber ** secondNumber;
   elif chooseTheArithmeticOperator == arithmeticOperator[6] :
     return firstNumber // secondNumber;
+
+if __name__ == '__main__':
+  show_arithmetic_operator()
+  calculation()

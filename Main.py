@@ -1,35 +1,29 @@
-import calculator
+from libs import calculation
+from time import sleep
 ## Creating a simple calculator
 
 def main():
-  user_input_number()
-  operator_selected()
-  showResults()
+  calculation.user_input_number()
+  calculation.operator_selected()
+  calculation.show_results()
+  continue_or_exit()
 
-def user_input_number():
-  global firstNumber, secondNumber
-  firstNumber = float(input('Masukkan angka pertama:\n-> '));
-  secondNumber = float(input('\nMasukkan angka kedua:\n-> '));
-
-def operator_selected():
-  global chooseTheArithmeticOperator
+def continue_or_exit():
+  set_countdown = 3
   while True:
-    calculator.showArithmeticOperator();
-    chooseTheArithmeticOperator = int(input('\nPilih operator sesuai yang ada diatas:\nNote: Pilih operator sesuai nomor!\n\n-> '));
-
-    n = len(calculator.arithmeticOperator); # panjang data array (bukan urutan index)
-    if chooseTheArithmeticOperator < 1 or chooseTheArithmeticOperator > n :
-      # Jika nilai chooseTheArithmeticOperator tidak valid, maka kembalikan nilai
-      print(f'Masukkan pilihan sesuai nomor yang tertera dari nomor 1- {n}. Coba lagi!\n');
-    elif chooseTheArithmeticOperator >= 0 or chooseTheArithmeticOperator < n:
-      chooseTheArithmeticOperator = chooseTheArithmeticOperator - 1; # rumus menyesuaikan urutan index array arithmeticOperator
-      print(f'\nKamu memilih: {calculator.arithmeticOperator[chooseTheArithmeticOperator][0]}'); # Menampilkan rumus yang dipilih
-      break;
-
-def showResults():
-  # Tampilkan Hasil
-  result = calculator.calculation(firstNumber, calculator.arithmeticOperator[chooseTheArithmeticOperator], secondNumber);
-  print(f"Hasil dari {firstNumber} {calculator.arithmeticOperator[chooseTheArithmeticOperator][1]} {secondNumber} adalah {result}");
+    user_confirmation = input("\nWanna count again?\nType [y / n] ")
+    match user_confirmation:
+      case "y" | "yes" | "Y" | "Yes" | "YES": 
+        return main()
+      case "n" | "no" | "N" | "No" | "NO":
+        while set_countdown >= 1:
+          print(100 * '\n' + f"Program ends in {set_countdown}")
+          set_countdown -= 1
+          sleep(1)
+        print("Program has shutdown")
+        break
+      case _:
+        return
 
 if __name__ == '__main__':
   main()
